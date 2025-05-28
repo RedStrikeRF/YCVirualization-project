@@ -14,7 +14,6 @@ export const LoginPage = () => {
 
   return (
     <div className="login-page fade-in">
-      
       <Form onSubmit={handleSubmit}>
         <Title level={4}>Вход пользователя</Title>
         <Input

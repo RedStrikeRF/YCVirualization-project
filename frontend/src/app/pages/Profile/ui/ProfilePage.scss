@@ -1,0 +1,65 @@
+.profile-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #1e1e1e; /* чуть светлее для контраста */
+  border-radius: 12px;
+  color: #fca311; /* основной оранжевый */
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fca311;
+    animation: fadeInUp 0.7s ease-out;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+    button {
+      flex: 1;
+      margin: 0 0.5rem;
+      padding: 0.6rem 1rem;
+      background-color: #fca311;
+      color: #1e1e1e;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #ffb733;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+        background-color: #ff4c4c;
+        color: #fff;
+
+        &:hover {
+          background-color: #ff1a1a;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
