@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Form, Button, Title } from '@shared/ui';
 import { useBehavior } from '../model';
+import './ProfilePage.scss';
 
 export const ProfilePage = () => {
   const {
