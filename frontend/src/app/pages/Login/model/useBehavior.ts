@@ -24,7 +24,7 @@ export const useBehavior = () => {
       const response = await loginUser(formData.nickname, formData.password);
       sessionStorage.setItem('isAuth', 'true');
       sessionStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/');
+      navigate('/profile');
     } catch (err) {
       const error = err as AxiosError<ApiError>;
       setError(error.response?.data?.error || 'Login failed');

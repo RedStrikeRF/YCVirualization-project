@@ -17,8 +17,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/login" replace />} />
-
           <Route
             path="profile"
             element={
@@ -37,6 +35,7 @@ function App() {
           />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route index element={<Navigate to="/login" replace />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
