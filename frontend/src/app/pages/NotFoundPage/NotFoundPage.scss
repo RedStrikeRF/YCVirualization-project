@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  position: relative;
+  height: 100svh;
+  background: #050505;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  font-size: 18px;
+}
+
+.img {
+  position: absolute;
+  bottom: 0;
+  max-width: 1920px;
+  margin: 0 auto;
+  animation: catAnim 1.5s ease forwards;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.img img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes catAnim {
+  0% {
+    translate: 0 50%;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+.okak {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 900;
+  font-size: 115px;
+  user-select: none;
+}
+
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 750px;
+  font-weight: 900;
+  transform: translate(-50%, 800px);
+  animation: errorAnim 1.5s ease forwards;
+  user-select: none;
+}
+
+@keyframes errorAnim {
+  100% {
+    transform: translate(-50%, -400px);
+  }
+}
+
+.back-button {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  color: #050505;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    background-color: #fca311;
+    color: #050505;
+    outline: none;
+  }
+}

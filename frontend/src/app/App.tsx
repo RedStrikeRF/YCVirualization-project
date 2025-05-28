@@ -10,6 +10,7 @@ import { LoginPage } from './pages/Login';
 import { RegisterPage } from './pages/Register';
 import { PrivateRoute } from './shared/PrivateRoute';
 import { Layout } from '@shared/ui';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -36,9 +37,8 @@ function App() {
           />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
-
-          <Route path="*" element={<h1 style={{ color: '#fca311', textAlign: 'center' }}>404 - Страница не найдена</h1>} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
