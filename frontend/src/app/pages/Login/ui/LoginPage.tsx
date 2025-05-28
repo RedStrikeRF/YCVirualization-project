@@ -1,66 +1,41 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '@app/api/users/userApi';
-import { AxiosError } from 'axios';
+import React from 'react';
+import { useBehavior } from '../model';
+import { Input, Form, Button, Title } from '@app/shared/ui';
 
-interface ApiError {
-  error?: string;
-}
+import './LoginPage.scss'
 
 export const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    nickname: '',
-    password: '',
-  });
-  
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await loginUser(formData.nickname, formData.password);
-      sessionStorage.setItem('isAuth', 'true');
-      sessionStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/');
-    } catch (err) {
-      const error = err as AxiosError<ApiError>;
-      setError(error.response?.data?.error || 'Login failed');
-    }
-  };
+  const { 
+    formData,
+    error,
+    handleChange,
+    handleSubmit
+  } = useBehavior();
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nickname:</label>
-          <input
-            type="text"
-            name="nickname"
-            value={formData.nickname}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-page fade-in">
+      
+      <Form onSubmit={handleSubmit}>
+        <Title level={4}>Вход пользователя</Title>
+        <Input
+          label="Почта пользователя"
+          name="nickname"
+          type="text"
+          value={formData.nickname}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          label="Пароль"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        {error && <div className="login-page__error">{error}</div>}
+        <Button type="submit">Войти</Button>
+      </Form>
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 0.6s ease-out;
+
+  &__label {
+    margin-bottom: 0.5rem;
+    color: #fca311;
+    font-weight: bold;
+  }
+
+  &__field {
+    padding: 0.5rem;
+    border: 1px solid #fca311;
+    background-color: #2a2a2a;
+    color: #fca311;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: #2a2a2a;
+      outline: none;
+      box-shadow: 0 0 5px rgba(255, 153, 0, 0.6);
+    }
+  }
+}
