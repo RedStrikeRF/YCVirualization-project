@@ -12,6 +12,7 @@ export default defineConfig({
       '@shared-ui': path.resolve(__dirname, './src/app/shared/ui'),
       '@shared-hooks': path.resolve(__dirname, './src/app/shared/hooks'),
       '@pages': path.resolve(__dirname, './src/app/pages'),
+      '@widgets': path.resolve(__dirname, './src/app/widgets'),
     }
   },
   build: {
