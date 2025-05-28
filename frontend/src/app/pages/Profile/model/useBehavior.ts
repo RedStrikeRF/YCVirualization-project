@@ -18,7 +18,8 @@ export const useBehavior = () => {
     birth_date: '',
   });
 
-  const nickname = sessionStorage.getItem('nickname') || '';
+  const userData = JSON.parse(sessionStorage.getItem('user') || '{}');
+  const nickname = userData.nickname || '';
   const navigate = useNavigate();
 
   useEffect(() => {
