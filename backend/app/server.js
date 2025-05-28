@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 import cors from 'cors';
 
 app.use(cors({
-  origin: 'https://helpwave-backet.website.yandexcloud.net',
+  origin: 'https://okak.website.yandexcloud.net',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
