@@ -8,6 +8,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+import cors from 'cors';
+
+app.use(cors({
+  origin: 'https://helpwave-backet.website.yandexcloud.net',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.get('/', (req, res) => {
   res.json({ message: "Сервер работает!", status: "OK" });
