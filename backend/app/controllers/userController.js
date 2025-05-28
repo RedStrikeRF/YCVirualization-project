@@ -11,6 +11,7 @@ export const register = async (req, res) => {
   try {
     const { first_name, last_name, nickname, password, birth_date } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await createUser({
       first_name,
       last_name,
@@ -18,6 +19,7 @@ export const register = async (req, res) => {
       password: hashedPassword,
       birth_date
     });
+
     res.status(201).json({ message: 'User created', user });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -28,10 +30,14 @@ export const login = async (req, res) => {
   try {
     const { nickname, password } = req.body;
     const user = await getUserByNickname(nickname);
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    res.json({ message: 'Login successful', user });
+
+    // Удаляем пароль из ответа
+    const userWithoutPassword = { ...user.get(), password: undefined };
+    res.json({ message: 'Login successful', user: userWithoutPassword });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
