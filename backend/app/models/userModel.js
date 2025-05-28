@@ -39,7 +39,6 @@ const User = sequelize.define(
   }
 );
 
-// Методы модели
 export const createUser = async (userData) => {
   return await User.create(userData);
 };

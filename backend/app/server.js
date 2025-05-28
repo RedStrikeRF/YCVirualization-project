@@ -9,6 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.json({ message: "Сервер работает!", status: "OK" });
+});
 app.use('/users', userRoutes);
 
 sequelize.sync({ force: false })
