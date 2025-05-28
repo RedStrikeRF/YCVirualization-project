@@ -1,44 +1,68 @@
-import { db } from '../db/database.js';
+import sequelize from '../db/database.js';
+import { DataTypes } from "sequelize";
 
-export const createUser = async (user) => {
-  const { first_name, last_name, nickname, password, birth_date } = user;
-  const result = await db.query(
-    `INSERT INTO users (first_name, last_name, nickname, password, birth_date)
-     VALUES ($1, $2, $3, $4, $5)
-     RETURNING id`,
-    [first_name, last_name, nickname, password, birth_date]
-  );
-  return result.rows[0];
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    nickname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    birth_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "users",
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  }
+);
+
+export const createUser = async (userData) => {
+  return await User.create(userData);
 };
 
 export const getUserByNickname = async (nickname) => {
-  const result = await db.query(
-    `SELECT * FROM users WHERE nickname = $1`,
-    [nickname]
-  );
-  return result.rows[0];
+  return await User.findOne({ where: { nickname } });
 };
 
 export const updateUser = async (nickname, updates) => {
-  const { first_name, last_name, birth_date } = updates;
-  await db.query(
-    `UPDATE users SET first_name = $1, last_name = $2, birth_date = $3 WHERE nickname = $4`,
-    [first_name, last_name, birth_date, nickname]
-  );
+  return await User.update(updates, { where: { nickname } });
 };
 
 export const deleteUser = async (nickname) => {
-  await db.query(`DELETE FROM users WHERE nickname = $1`, [nickname]);
+  return await User.destroy({ where: { nickname } });
 };
 
-export const getUsersPaginated = async (page, limit) => {
+export const getUsersPaginated = async (page = 1, limit = 10) => {
   const offset = (page - 1) * limit;
-  const result = await db.query(
-    `SELECT first_name, last_name, nickname, birth_date
-     FROM users
-     ORDER BY id
-     LIMIT $1 OFFSET $2`,
-    [limit, offset]
-  );
-  return result.rows;
+  return await User.findAll({
+    attributes: ['first_name', 'last_name', 'nickname', 'birth_date'],
+    limit,
+    offset,
+    order: [['id', 'ASC']]
+  });
 };
+
+export default User;
