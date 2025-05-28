@@ -7,7 +7,9 @@
     "bcrypt": "^5.1.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "sequelize": "^6.37.7",
+    "user-backend": "file:"
   },
   "scripts": {
     "server": "node app/server.js"

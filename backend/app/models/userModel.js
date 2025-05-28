@@ -1,4 +1,55 @@
 import { db } from '../db/database.js';
+const { DataTypes } = require("sequelize");
+const sequelize = require("../db/database");
+
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: false,
+    },
+    nickname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    birth_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+  },
+  {
+    tableName: "users",
+    timestamps: true,
+  }
+);
+
+module.exports = User;
 
 export const createUser = async (user) => {
   const { first_name, last_name, nickname, password, birth_date } = user;

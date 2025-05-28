@@ -1,6 +1,7 @@
 import express from 'express';
 import userRoutes from './routes/userRoutes.js';
 import dotenv from 'dotenv';
+const { sequelize } = require("./models");
 
 dotenv.config();
 
@@ -10,6 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/users', userRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}).catch((error) => {
+  console.error("Unable to connect to the database:", error);
 });
